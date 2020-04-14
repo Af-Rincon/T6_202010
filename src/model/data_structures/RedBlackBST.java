@@ -238,6 +238,23 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
         h.right.color = !h.right.color;
     }
     
+    public Iterable<Value> valuesInRange(Key init, Key end)
+    {
+    	Iterable<Key> llaves = keys(init, end);
+    	Queue<Value> valores = new Queue<Value>();
+    	
+    	for(Key k :llaves)
+    	{
+    		valores.enqueue(get(k));
+    	}
+    	
+    	return valores;
+    }
+    
+    public Iterable<Key> keysInRange(Key init, Key end)
+    {
+    	return keys(init, end);
+    }
   //CHECK
     
     public Key min() {

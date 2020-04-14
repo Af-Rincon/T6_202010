@@ -182,6 +182,11 @@ public class Comparendo implements Comparable<Comparendo> {
 		return "OBJECTID:" + objectID + "CLASE VEHICULO:" + claseVehiculo + "Latitud:" + latitud + "Longitud:" + longitud ;
 	}
 	
+	public String datosCluster3()
+	{
+		return "OBJECTID:" +objectID+"FECHA_HORA:"+fecha+"TIPO_SERVICIO:"+tipoServicio+"CLASE_VEHICULO"+claseVehiculo+"INFRACCION:"+infraccion;
+	}
+	
 	
 	@Override
 	public int compareTo(Comparendo comparendo) 

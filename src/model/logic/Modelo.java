@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 
+import model.data_structures.Queue;
 import model.data_structures.RedBlackBST;
 
 /**
@@ -92,6 +93,17 @@ public class Modelo {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public Comparendo consultarPorID(String id)
+	{
+		Comparendo buscado = arbolRN.get(id);
+		return buscado;
+	}
+	
+	public Iterable<Comparendo> consultarRangoID(String lo, String hi)
+	{
+		return arbolRN.valuesInRange(lo, hi);
 	}
 
 
