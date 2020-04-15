@@ -55,6 +55,30 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
     
     //Functionality 
     
+    public int height()
+    {
+    	if(root!=null)
+    	return getHeight(root);
+    	
+    	return 0;
+    }
+    
+    public int getHeight(Node x)
+    {
+    	int hl = 0; int hr = 0;
+    	
+    	if(x.left!=null)
+    	{
+    		hl = getHeight(x.left);
+    	}
+    	if(x.right!=null)
+    	{
+    		hr = getHeight(x.right);
+    	}
+    	
+    	return 1+Math.max(hl, hr);
+    }
+    
     public Value get(Key key) {
         if (key == null) throw new IllegalArgumentException("argument to get() is null");
         return get(root, key);
