@@ -121,10 +121,17 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
     
     public int heightProm()
     {
-    	if(root!=null)
-        	return (heightLeft(root)+heightRight(root)+1)/2;
-        	
-        	return 0;
+    	return heightProm(root);
+    }
+    
+    public int heightProm(Node x)
+    {
+    	if(x== null)
+    	{
+    		return -1;
+    	}
+    	
+    	return 1+(heightProm(x.left)+heightProm(x.right))/2;
     }
     
     public int heightLeft(Node x)
