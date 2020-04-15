@@ -21,19 +21,25 @@ public class Modelo {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	public static String PATH = "./data/Comparendos_DEI_2018_Bogota_D.C_small.geojson";
-	
+	public static String PATH = "./data/Comparendos_DEI_2018_Bogotá_D.C.geojson";
+
 	private RedBlackBST<String, Comparendo> arbolRN;
-	
+
+	private int idMax;
+
+	private int idMin;
+
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo()
 	{
 		arbolRN = new RedBlackBST<String, Comparendo>();
+		idMax = 0;
+		idMin = 10000000;
 	}
-	
-	
+
+
 	/**
 	 * Servicio de consulta de numero de elementos presentes en el modelo 
 	 * @return numero de elementos presentes en el modelo
@@ -41,6 +47,21 @@ public class Modelo {
 	public int darTamano()
 	{
 		return arbolRN.size();
+	}
+	
+	public RedBlackBST<String,Comparendo> darArbolRN()
+	{
+		return arbolRN;
+	}
+
+	public int darMayorID()
+	{
+		return idMax;
+	}
+
+	public int darMenorID()
+	{
+		return idMin;
 	}
 
 	public void cargarDatos() 
@@ -51,7 +72,6 @@ public class Modelo {
 		try {
 
 
-			int mayorID  = 0;
 			reader = new JsonReader(new FileReader( PATH));
 			JsonParser jsonp = new JsonParser();
 
@@ -85,6 +105,16 @@ public class Modelo {
 				String key = c.darObjectID()+"";
 				arbolRN.put(key, c);
 
+				if(OBJECTID > idMax)
+				{
+					idMax = OBJECTID; 
+				}
+
+				if(OBJECTID < idMin)
+				{
+					idMin = OBJECTID;
+				}
+
 			}
 
 		} 
@@ -95,19 +125,19 @@ public class Modelo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Comparendo consultarPorID(String id)
 	{
 		Comparendo buscado = arbolRN.get(id);
 		return buscado;
 	}
-	
+
 	public Iterator<Comparendo> consultarRangoID(String lo, String hi)
 	{
 		return arbolRN.valuesInRange(lo, hi);
 	}
-	
-	
+
+
 
 
 }
