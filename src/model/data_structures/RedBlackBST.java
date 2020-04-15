@@ -335,7 +335,14 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
         else                      return x.key;
     }
     
-   
+    private boolean check() {
+        if (!isBST())            System.out.println("Not in symmetric order");
+        if (!isSizeConsistent()) System.out.println("Subtree counts not consistent");
+        if (!isRankConsistent()) System.out.println("Ranks not consistent");
+        if (!is23())             System.out.println("Not a 2-3 tree");
+        if (!isBalanced())       System.out.println("Not balanced");
+        return isBST() && isSizeConsistent() && isRankConsistent() && is23() && isBalanced();
+    }
   
     private boolean isBST() {
         return isBST(root, null, null);

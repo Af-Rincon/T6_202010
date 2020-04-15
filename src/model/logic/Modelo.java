@@ -105,6 +105,8 @@ public class Modelo {
 	{
 		return arbolRN.valuesInRange(lo, hi);
 	}
+	
+	
 
 
 }
