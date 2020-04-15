@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 import model.logic.Comparendo;
@@ -49,10 +50,12 @@ public class Controller {
 					String lo = lector.next();
 					view.printMessage("Digite el segundo objectID");
 					String hi = lector.next();
-					Iterable<Comparendo> valores = modelo.consultarRangoID(lo, hi);
-					for(Comparendo c : valores)
+					Iterator<Comparendo> valores = modelo.consultarRangoID(lo, hi);
+					while(valores.hasNext())
 					{
+						Comparendo c = valores.next();
 						view.printMessage(c.datosCluster3());
+						c = valores.next();
 					}
 				break;
 				

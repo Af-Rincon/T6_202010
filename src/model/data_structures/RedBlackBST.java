@@ -1,5 +1,6 @@
 package model.data_structures;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RedBlackBST<Key extends Comparable <Key>,Value> {
@@ -63,6 +64,16 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
     	return 0;
     }
     
+    public int getHeight(Key key)
+    {
+    	if(key== null)
+    	{
+    		throw new IllegalArgumentException("La llave pasada por parametro no puede ser null");
+    	}
+    	
+    	return getHeight(root, key);
+    }
+    
     public int getHeight(Node x)
     {
     	int hl = 0; int hr = 0;
@@ -75,14 +86,43 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
     	{
     		hr = getHeight(x.right);
     	}
+
+    	return 1 + Math.max(hl, hr);
+    }
+    
+    public int getHeight(Node x, Key k)
+    {
+    	int altura = 0;
     	
-    	return 1+Math.max(hl, hr);
+    	while(x!= null)
+    	{
+    		int comparacion = k.compareTo(x.key);
+    		
+    		if(comparacion > 0)
+    		{
+    			altura++;
+    			x = x.right;
+    		}
+    		
+    		else if(comparacion < 0)
+    		{
+    			altura ++;
+    			x = x.left;
+    		}
+    		
+    		else
+    		{
+    			return 1 + altura;
+    		}
+    	}
+    	
+    	return -1;
     }
     
     public int heightProm()
     {
     	if(root!=null)
-        	return (heightLeft(root)+heightRight(root))/2;
+        	return (heightLeft(root)+heightRight(root)+1)/2;
         	
         	return 0;
     }
@@ -290,7 +330,7 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
         h.right.color = !h.right.color;
     }
     
-    public Iterable<Value> valuesInRange(Key init, Key end)
+    public Iterator<Value> valuesInRange(Key init, Key end)
     {
     	Iterable<Key> llaves = keys(init, end);
     	Queue<Value> valores = new Queue<Value>();
@@ -300,12 +340,12 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
     		valores.enqueue(get(k));
     	}
     	
-    	return valores;
+    	return valores.iterator();
     }
     
-    public Iterable<Key> keysInRange(Key init, Key end)
+    public Iterator<Key> keysInRange(Key init, Key end)
     {
-    	return keys(init, end);
+    	return keys(init, end).iterator();
     }
   //CHECK
     
@@ -387,7 +427,7 @@ public class RedBlackBST<Key extends Comparable <Key>,Value> {
         else                      return x.key;
     }
     
-    private boolean check() {
+    public boolean check() {
         if (!isBST())            System.out.println("Not in symmetric order");
         if (!isSizeConsistent()) System.out.println("Subtree counts not consistent");
         if (!isRankConsistent()) System.out.println("Ranks not consistent");

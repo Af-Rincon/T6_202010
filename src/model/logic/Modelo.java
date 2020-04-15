@@ -3,6 +3,7 @@ package model.logic;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
+import java.util.Iterator;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -101,7 +102,7 @@ public class Modelo {
 		return buscado;
 	}
 	
-	public Iterable<Comparendo> consultarRangoID(String lo, String hi)
+	public Iterator<Comparendo> consultarRangoID(String lo, String hi)
 	{
 		return arbolRN.valuesInRange(lo, hi);
 	}
